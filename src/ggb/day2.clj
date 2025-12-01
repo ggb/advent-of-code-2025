@@ -1,0 +1,1 @@
+(ns ggb.day2)
