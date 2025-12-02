@@ -5,7 +5,7 @@
   (->> (str/split (slurp "data/day2.txt") #",")
        (map #(str/split % #"-"))
        (map (fn [[fst snd]]
-              (range (parse-long fst) (inc (parse-double snd)))))
+              (range (parse-long fst) (inc (parse-long snd)))))
        (reduce concat)
        (map str)))
 
