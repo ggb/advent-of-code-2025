@@ -1,31 +1,36 @@
 (ns ggb.day3
   (:require [clojure.string :as str]))
 
+(def input
+  (->> (slurp "data/day3.txt")
+       str/split-lines
+       (map to-num-list)))
 
 (defn to-num-list
   [l]
   (map #(Character/getNumericValue %) l))
 
-(defn max-or-nil
-  [val]
-  (if (empty? val) nil (apply max val)))
+(defn joltage-helper
+  [[l res] n]
+  (let [slice (drop-last n l)
+        lm (apply max slice)
+        lk (str/index-of (apply str slice) (str lm))]
+    [(drop (inc lk) l) (conj res lm)]))
 
-(defn find-max
-  [l]
-  (let [lm (apply max l)
-        lk (str/index-of (apply str l) (str lm))
-        [left right] (split-at lk l)
-        left-max (max-or-nil left)
-        right-max (max-or-nil (rest right))]
-    (max (parse-long (str left-max lm))
-         (parse-long (str lm right-max)))))
+(defn joltage
+  [n l]
+  (->> (reverse (range n))
+       (reduce joltage-helper [l []])
+       second
+       (apply str)
+       parse-long))
 
 ;; Part 1
-(->> (slurp "data/day3.txt")
-     str/split-lines
-     (map to-num-list)
-     (map find-max)
+(->> input
+     (map (partial joltage 2))
      (reduce +))
 
 ;; Part 2
-;; noch keine Zeit gehabt... 
+(->> input
+     (map (partial joltage 12))
+     (reduce +))
