@@ -1,4 +1,4 @@
-(ns ggb.day2
+(ns ggb.day4
   (:require [clojure.string :as str]))
 
 (def input
