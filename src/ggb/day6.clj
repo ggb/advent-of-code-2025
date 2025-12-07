@@ -31,9 +31,7 @@
   (->> col
        (map seq)
        (apply mapv vector)
-       (map #(apply str %))
-       (map str/trim)
-       (map parse-long)))
+       (map (comp parse-long str/trim #(apply str %)))))
 
 (->> input
      drop-last
