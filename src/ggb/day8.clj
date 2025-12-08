@@ -15,8 +15,7 @@
              [p q]
              (->> (map #(- %1 %2) p q)
                   (map #(math/pow % 2))
-                  (reduce +)
-                  ))))
+                  (reduce +)))))
 
 (defn distances
   [l]

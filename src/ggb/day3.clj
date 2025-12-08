@@ -1,14 +1,14 @@
 (ns ggb.day3
   (:require [clojure.string :as str]))
 
+(defn to-num-list
+  [l]
+  (map #(Character/getNumericValue %) l))
+
 (def input
   (->> (slurp "data/day3.txt")
        str/split-lines
        (map to-num-list)))
-
-(defn to-num-list
-  [l]
-  (map #(Character/getNumericValue %) l))
 
 (defn joltage-helper
   [[l res] n]
