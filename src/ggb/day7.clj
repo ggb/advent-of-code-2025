@@ -42,7 +42,7 @@
 (first results)
 
 ;; Part 2
-(->> results 
-     second 
+(->> results
+     second
      (map second)
      (reduce +))
